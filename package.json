@@ -1,6 +1,6 @@
 {
   "name": "mern-shopping-cart",
-  "type":"module",
+  "type": "module",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,9 +8,12 @@
     "express": "^4.17.1",
     "react-router-dom": "^5.2.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^7.26.0",
+    "eslint-plugin-react": "^7.23.2"
+  },
   "scripts": {
-   "start":"nodemon --watch backend --exec node --experimental-modules backend/server.js"
+    "start": "nodemon --watch backend --exec node --experimental-modules backend/server.js"
   },
   "author": "",
   "license": "ISC"

@@ -96,3 +96,6 @@ img.medium{
     margin: 0.1rem;
   }
   
+.small{
+    height: 120px;
+}
