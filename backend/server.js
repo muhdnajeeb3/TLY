@@ -1,29 +1,38 @@
 import express from 'express'
-import data from './data.js';
+import mongoose from 'mongoose'
+import dotenv from 'dotenv'
+import productRouter from './routers/productRouter.js';
+import userRouter from './routers/userRouter.js';
+
+
+dotenv.config();
 
 const app = express();
+app.use(express.json());
+app.use(express.urlencoded({extended:true}))
 
-app.get('/api/products/:id',(req,res)=>{
-    const product = data.products.find((x) =>x._id === req.params.id);
-    if(product){
-       res.send(product);
-    //    console.log('okkk');
-    }else{
-        res.status(404).send({message:"product n not found"})
-        // console.log("noooo");
-    }
+mongoose.connect(process.env.MONGODB_URL|| 'mongodb://localhost/amazona',{
+    useNewUrlParser:true,
+    useUnifiedTopology:true,
+    useCreateIndex:true,
+    
 })
+console.log('connected to databse');
 
-app.get('/api/products',(req,res)=>{
-    res.send(data.products)
-    // console.log("heyyyy");
-})
+app.use('/api/users',userRouter)
+app.use('/api/products',productRouter)
 
 
 app.get('/',(req,res)=>{
     res.send('server is running')
 })
-const port =process.env.PORT || 6000;
+
+app.use((err, req, res, next)=>{
+    res.status(500).send({message: err.message})
+})
+
+const port =process.env.PORT || 5000;
 app.listen(port, ()=>{
     console.log(`Serve at http://localhost:${port}`);
+    
 })

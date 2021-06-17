@@ -1,7 +1,25 @@
+import bcrypt from 'bcryptjs'
+
 const data={
+    users : [
+        {
+            name:'Zafar',
+            email:'admin@example.com',
+            password: bcrypt.hashSync('1234',8),
+            isAdmin:true,
+        },
+      
+        {
+            name:'neha',
+            email:'neha@example.com',
+            password:bcrypt.hashSync('abcd',8),
+            isAdmin:false
+            
+        },
+    ],
     products:[
         {
-            _id:'1',
+           
             name:'Nike Slim Shirt',
             category:'Shirts',
             image:'../images/p1.jpg',
@@ -13,7 +31,7 @@ const data={
             description:"High quality products"
         },
         {
-            _id:'2',
+            
             name:'Addidas Shirt',
             category:'Shirts',
             image:'../images/p2.jpg',
@@ -25,7 +43,7 @@ const data={
             description:"High quality products"
         },
         {
-            _id:'3',
+            
             name:'Rebook',
             category:'Shirts',
             image:'../images/p3.jpg',
@@ -37,7 +55,7 @@ const data={
             description:"High quality products"
         },
         {
-            _id:'4',
+            
             name:'Joguar',
             category:'Shirts',
             image:'../images/p4.jpg',
@@ -49,7 +67,7 @@ const data={
             description:"High quality products"
         },
         {
-            _id:'5',
+           
             name:'Urban',
             category:'Shirts',
             image:'../images/p5.jpg',
@@ -61,7 +79,7 @@ const data={
             description:"High quality products"
         },
         {
-            _id:'6',
+           
             name:'Urban Cool',
             category:'Shirts',
             image:'../images/p6.jpg',
