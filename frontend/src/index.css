@@ -72,6 +72,7 @@ button{
 button{
   background-color:#f8f8f8;
   cursor: pointer;
+  width: 100%;
 }
 input:hover,
 select:hover, 
@@ -81,6 +82,7 @@ button:hover{
 }
 button.primary{
   background-color: #f0c040;
+
 }
 button.block{
   width: 100%;
@@ -218,7 +220,7 @@ img.large{
 }
 .form label{
   margin: 1rem 0;
-  display: block;
+  /* display: block; */
 }
 
 /* dropdown */
