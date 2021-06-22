@@ -3,6 +3,7 @@ import { BrowserRouter, Link, Route } from "react-router-dom";
 import { signout } from "./actions/userAction";
 import CartScreen from "./screens/CartScreen";
 import HomeScreens from "./screens/HomeScreens";
+import OrderScreen from "./screens/OrderScreen";
 import PaymentMethodScreen from "./screens/PaymentMethodScreen";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 import ProductScreen from "./screens/ProductScreen";
@@ -38,7 +39,7 @@ function App() {
             {userInfo ? (
               <div className="dropdown">
                 <Link to="#">
-                  {userInfo.name} <i className="fa fa-carret-down"></i>
+                {userInfo.name} <i className="fa fa-carret-down"></i>
                 </Link>
                 <ul className="dropdown-content">
                   <Link to='#signout' onClick={signoutHandler}>Signout</Link>
@@ -57,7 +58,8 @@ function App() {
           <Route path="/shipping" component={ShippingAddressScreen}></Route>
           <Route path="/payment" component={PaymentMethodScreen}></Route>
           <Route path="/placeorder" component={PlaceOrderScreen}></Route>
-           <Route path="/" component={HomeScreens} exact></Route>
+          <Route path="/order/:id" component={OrderScreen}></Route>
+          <Route path="/" component={HomeScreens} exact></Route>
         </main>
         <div className="footer">
           <center>All rights Reserved</center>
