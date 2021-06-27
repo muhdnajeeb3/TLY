@@ -1,12 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Link, Route } from "react-router-dom";
 import { signout } from "./actions/userAction";
+import PrivateRoute from "./components/PrivateRoute";
 import CartScreen from "./screens/CartScreen";
 import HomeScreens from "./screens/HomeScreens";
+import OrderHistoryScreen from "./screens/OrderHistoryScreen";
 import OrderScreen from "./screens/OrderScreen";
 import PaymentMethodScreen from "./screens/PaymentMethodScreen";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 import ProductScreen from "./screens/ProductScreen";
+import ProfileScreen from "./screens/ProfileScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import ShippingAddressScreen from "./screens/ShippingAddressScreen";
 import signinScreen from "./screens/SigninScreen";
@@ -39,14 +42,41 @@ function App() {
             {userInfo ? (
               <div className="dropdown">
                 <Link to="#">
-                {userInfo.name} <i className="fa fa-carret-down"></i>
+                {userInfo.name} <i className="fa fa-caret-down"></i>{''}
                 </Link>
                 <ul className="dropdown-content">
-                  <Link to='#signout' onClick={signoutHandler}>Signout</Link>
+                  <li>
+                      <Link to='/orderHistory'>Order History</Link> 
+                  </li>
+                  <li>
+                    <Link to='/profile'>User Profile</Link>
+                  </li>
+                  <li>
+                    <Link to='#signout' onClick={signoutHandler}>Signout</Link>
+                  </li>   
                 </ul>
               </div>
             ) : (
               <Link to="/signin">Sign In</Link>
+            )}
+            {userInfo && userInfo.isAdmin && (
+              <div className='dropdown'>
+                <Link to='#admin'>Admin {' '} <i className='fa fa-caret-down'></i></Link>
+                <ul className='dropdown-content'>
+                  <li>
+                    <Link to='/dashboard'>Dashboard</Link>
+                  </li>
+                  <li>
+                    <Link to='/productlist'>Products</Link>
+                  </li>
+                  <li>
+                    <Link to='/orderlist'>Orders</Link>
+                  </li>
+                  <li>
+                    <Link to='/userlist'>Users</Link>
+                  </li>
+                </ul>
+              </div>
             )}
           </div>
         </header>
@@ -59,6 +89,8 @@ function App() {
           <Route path="/payment" component={PaymentMethodScreen}></Route>
           <Route path="/placeorder" component={PlaceOrderScreen}></Route>
           <Route path="/order/:id" component={OrderScreen}></Route>
+          <Route path='/orderHistory' component={OrderHistoryScreen}></Route>
+          <PrivateRoute path='/profile' component={ProfileScreen}></PrivateRoute>
           <Route path="/" component={HomeScreens} exact></Route>
         </main>
         <div className="footer">

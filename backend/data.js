@@ -16,6 +16,12 @@ const data={
             isAdmin:false
             
         },
+        {
+            name:'zafu',
+            email:'zafu@gmail.com',
+            password:bcrypt.hashSync('123',8),
+            isAdmin:true
+        }
     ],
     products:[
         {
