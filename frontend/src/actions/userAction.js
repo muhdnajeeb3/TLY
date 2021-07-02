@@ -82,7 +82,7 @@ export const detailsUser =(userId)=> async (dispatch,getState)=>{
 
 export const updateUserProfile =(user) => async(dispatch,getState)=>{
   dispatch ({type:USER_UPDATE_PROFILE_REQUEST,payload:user});
-  console.log('heyyy');
+  // console.log('heyyy');
   const {userSignin:{userInfo}} =getState();
   try{
      const {data} = await Axios.put('/api/users/profile',user,{

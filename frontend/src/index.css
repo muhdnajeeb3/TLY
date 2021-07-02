@@ -72,7 +72,7 @@ button{
 button{
   background-color:#f8f8f8;
   cursor: pointer;
-  width: 100%;
+  /* width: 100%; */
 }
 input:hover,
 select:hover, 
