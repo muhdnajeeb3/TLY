@@ -2,14 +2,16 @@ import express from 'express'
 import expressAsyncHandler from 'express-async-handler';
 import data from '../data.js';
 import Product from '../models/productModel.js';
-import { isAdmin, isAuth } from "../util.js";
+import { isAdmin, isAuth, isSellerOrAdmin } from "../util.js";
 
 const productRouter = express.Router();
 
 
 // sending list of products to forntend
 productRouter.get('/',expressAsyncHandler(async(req,res)=>{
-    const products = await Product.find({});
+    const seller =  req.query.seller || '' ;
+    const sellerFilter = seller? {seller}: {};
+    const products = await Product.find({...sellerFilter}).populate('seller','seller.name seller.logo');
     res.send(products);
     // console.log(products);
 }));
@@ -27,10 +29,10 @@ productRouter.get('/seed',expressAsyncHandler(async(req,res)=>{
 
 // returning details of the product to frontend
 productRouter.get('/:id',expressAsyncHandler(async(req,res)=>{
-    const product = await Product.findById(req.params.id)
+    const product = await Product.findById(req.params.id).populate('seller','seller.name seller.logo seller.rating seller.numReviews');
     if(product){
          res.send(product)
-         console.log("setttt");
+        //  console.log("setttt");
     }else{
          res.status(404).send({message:"Product not found"})
          console.log('okk');
@@ -38,9 +40,10 @@ productRouter.get('/:id',expressAsyncHandler(async(req,res)=>{
    
 }));
 
-productRouter.post('/',isAuth,isAdmin,expressAsyncHandler(async(req,res)=>{
+productRouter.post('/',isAuth,isSellerOrAdmin,expressAsyncHandler(async(req,res)=>{
    const product = new Product({
     name:'sample name'+Date.now(),
+    seller:req.user._id,
     category:'sample categry',
     brand:'sample brand',
     image:'../images/p1.jpg',
@@ -54,7 +57,7 @@ productRouter.post('/',isAuth,isAdmin,expressAsyncHandler(async(req,res)=>{
    res.send({ message: 'Product Created', product: createdProduct });
 }))
 
-productRouter.put('/:id',isAuth,isAdmin,expressAsyncHandler(async(req,res)=>{
+productRouter.put('/:id',isAuth,isSellerOrAdmin,expressAsyncHandler(async(req,res)=>{
     const productId = req.params.id;
     const product= await Product.findById(productId);
     if(product){

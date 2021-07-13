@@ -3,7 +3,7 @@ import expressAsyncHandler from "express-async-handler";
 import bcrypt from "bcryptjs";
 import data from "../data.js";
 import User from "../models/userModel.js";
-import { generateToken, isAuth } from "../util.js";
+import { generateToken, isAdmin, isAuth } from "../util.js";
 
 const userRouter = express.Router();
 
@@ -26,6 +26,7 @@ userRouter.post(
           name: user.name,
           email: user.email,
           isAdmin: user.isAdmin,
+          isSeller:user.isSeller,
           token: generateToken(user),
         });
         return;
@@ -48,6 +49,7 @@ userRouter.post(
       name: createdUser.name,
       email: createdUser.email,
       isAdmin: createdUser.isAdmin,
+      isSeller:user.isSeller,
       token: generateToken(createdUser),
     });
 
@@ -69,6 +71,11 @@ userRouter.put('/profile',isAuth,expressAsyncHandler (async(req,res)=>{
    
      user.name = req.body.name || user.name;
      user.email = req.body.email || user.email;
+     if(user.isSeller){
+       user.seller.name = req.body.sellerName || user.seller.name
+       user.seller.logo = req.body.sellerLogo || user.seller.logo
+       user.seller.description = req.body.sellerDescription || user.seller.description
+      }
      if(req.body.password){
        user.password =bcrypt.hashSync(req.body.password, 9)
      }
@@ -78,12 +85,51 @@ userRouter.put('/profile',isAuth,expressAsyncHandler (async(req,res)=>{
        name:updatedUser.name,
        email:updatedUser.email,
        isAdmin:updatedUser.isAdmin,
+       isSeller:user.isSeller,
        token:generateToken(updatedUser),
 
      });
    }else{
      console.log('nooo');
    }
+}))
+
+userRouter.get('/',isAuth,isAdmin,expressAsyncHandler(async(req,res)=>{
+  const users = await User.find({});
+   if(users){
+     res.send(users)
+   }else{
+     res.status(404).send({message:'User not found'});
+   }
+}))
+userRouter.delete('/:id',isAuth,isAdmin,expressAsyncHandler(async(req,res)=>{
+  const user = await User.findById(req.params.id);
+  if(user){
+    // console.log('user');
+    if(user.email === 'admin@example.com'){
+      res.status(400).send({message:"Cannot delete Admin User"})
+      return;
+    }
+    const deleteUser = await user.remove();
+    res.send({message:"user Deleter",user:deleteUser})
+  }else{
+    res.status(404).send({message:"user not found"})
+    // console.log('user no');
+  }
+}))
+
+userRouter.put('/:id',isAuth,isAdmin,expressAsyncHandler(async(req,res)=>{
+  const user = await User.findById(req.params.id);
+  if(user){
+    user.name = req.body.name || user.name;
+    user.email = req.body.email|| user.email;
+    user.isSeller = req.body.isSeller || user.isSeller;
+    user.isAdmin = req.body.isAdmin || user.isAdmin;
+    const updatedUser =await user.save()
+    res.send({message:'User updated',user:updatedUser})
+  }else{
+    res.status(404).send({message:"user not found"})
+  }
 }))
 
 export default userRouter;
