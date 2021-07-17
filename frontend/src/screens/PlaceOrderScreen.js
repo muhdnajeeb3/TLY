@@ -117,7 +117,7 @@ function PlaceOrder(props) {
                                 </div>
                             </li>
                             <li>
-                                <button type='button' onClick={PlaceOrderHandler} className='primary'  disabled={cart.cartItems.length=== 0}>Place Order
+                                <button type='button' onClick={PlaceOrderHandler} className='primary block'  disabled={cart.cartItems.length=== 0}>Place Order
                              
                                 </button>
                              </li>   

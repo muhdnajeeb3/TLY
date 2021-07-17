@@ -39,7 +39,7 @@ function ProfileScreen() {
       // console.log(user.isSeller,"user is");
     }
     if(user.seller){
-        console.log(user.seller.name,"ok");
+        console.log(user.seller,"ok");
         console.log(user);
         setSellerName(user.seller.name);
         setSellerLogo(user.seller.logo);

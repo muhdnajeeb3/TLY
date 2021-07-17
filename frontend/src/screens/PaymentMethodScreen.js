@@ -41,7 +41,7 @@ function PaymentMethodScreen(props) {
                         <label htmlFor='Stripe'>Stripe</label>
                     </div>
                 </div>
-                <button className='primary' type='submit'>Continue</button>
+                <button className='primary block' type='submit'>Continue</button>
               
             </form>
 
