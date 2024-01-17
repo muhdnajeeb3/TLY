@@ -38,7 +38,7 @@ function ProfileScreen() {
       setEmail(user.email);
       // console.log(user.isSeller,"user is");
     }
-    if(user.seller){
+    if(user?.seller){
         console.log(user.seller,"ok");
         console.log(user);
         setSellerName(user.seller.name);

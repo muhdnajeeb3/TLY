@@ -63,7 +63,7 @@ function App() {
               
             </button>
             <Link className="brand" to="/">
-              amazona
+              TLY
             </Link>
           </div>
           <div>

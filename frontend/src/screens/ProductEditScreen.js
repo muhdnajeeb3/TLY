@@ -30,7 +30,7 @@ function ProductEditScreen(props) {
            dispatch(detailsProduct(productId));
         }else{
             setName(product.name);
-            setPrice(product.price);
+            setPrice(product?.price);
             setImage(product.image);
             setCategory(product.category);
             setCountInStock(product.countInStock);

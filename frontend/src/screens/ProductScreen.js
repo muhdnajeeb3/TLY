@@ -50,7 +50,7 @@ function ProductScreen(props) {
                     numReviews={product.numReviews}
                   />
                 </li>
-                <li>Price : ${product.price}</li>
+                <li>Price : ${product?.price}</li>
                 <li>
                   Description:
                   <p>{product.description}</p>
@@ -62,7 +62,7 @@ function ProductScreen(props) {
                 <ul>
                   <li>
                     Seller <h2> <Link to={`/seller/${product.seller._id}`}>
-                     {product.seller.seller.name} </Link> </h2>
+                     {product?.seller.seller.name} </Link> </h2>
                      <Rating rating={product.seller.seller.rating}
                       numReviews={product.seller.seller.numReviews} >                     
                       </Rating>

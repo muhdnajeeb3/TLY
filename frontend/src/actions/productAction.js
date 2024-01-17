@@ -81,7 +81,7 @@ export const updateProduct = (product) => async(dispatch,getState)=>{
   dispatch({type:PRODUCT_UPDATE_REQUEST,payload:product})
   const {userSignin:{userInfo}} = getState();
   try{
-    const {data} = await Axios.put(`/api/products/${product._id}`,product,{
+    const {data} = await Axios.put(`/api/products/${product?._id}`,product,{
       headers: { Authorization: `Bearer ${userInfo.token}` },   
     })
     dispatch({type:PRODUCT_UPDATE_SUCCESS,payload:data})

@@ -180,7 +180,7 @@ function OrderScreen(props) {
                       )}
                       {loadingPay && <LoadingBox></LoadingBox>}
                       <PayPalButton
-                        amount={order.totalPrice}
+                        amount={order?.totalPrice}
                         onSuccess={successPaymentHandler}
                       ></PayPalButton>
                     </>
@@ -188,7 +188,7 @@ function OrderScreen(props) {
                 </li>
               )}
               
-                {userInfo.isAdmin && order.isPaid && !order.isDelivered &&(
+                {userInfo?.isAdmin && order.isPaid && !order.isDelivered &&(
                   <li>
                     {loadingDeliver && <LoadingBox></LoadingBox>}
                     {errorDeliver && <MessageBox variant='danger'>{errorDeliver}</MessageBox>}

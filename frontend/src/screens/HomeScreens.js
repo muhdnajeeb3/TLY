@@ -24,23 +24,25 @@ function HomeScreens() {
 
   return (
     <div>
-      <h2>Top Sellers</h2>
+      <h2>Top Products</h2>
       {loadingSellers ? (
         <LoadingBox></LoadingBox>
       ) : errorSellers ? (
         <MessageBox variant="danger">{errorSellers}</MessageBox>
       ) : (
         <>
-        {sellers.length === 0 && <MessageBox>No Seller Found</MessageBox> }
+        {/* {sellers.length === 0 && <MessageBox>No Seller Found</MessageBox> } */}
         <Carousel showArrows autoPlay showThumbs={false}>
-          {sellers.map((seller)=>(
+          {/* {sellers.map((seller)=>(
             <div key={seller._id}>
               <Link to={`/seller/${seller._id}`}>
                 <img src={seller.seller.logo} alt={seller.seller.name}></img>
                 <p className='legend'>{seller.seller.name}</p>
               </Link>
             </div>
-          ))}
+          ))} */}
+          <img src="https://img.freepik.com/free-photo/world-diabetes-day-sugar-wooden-bowl-dark-surface_1150-26666.jpg?size=626&ext=jpg&ga=GA1.1.1412446893.1705104000&semt=ais" alt=""/>
+          <img src="https://media.istockphoto.com/id/157476197/photo/thai-rice-for-sale-in-a-market.jpg?s=612x612&w=0&k=20&c=NPYXwfN5HexissJQzorPQKRRSzrCOLNgNrSovNaWh8w=" alt="" />
         </Carousel>
         
         </>
