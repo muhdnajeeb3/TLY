@@ -33,7 +33,7 @@ app.get('/api/config/paypal',(req,res)=>{
 const __dirname = path.resolve();
 app.use('/upload', express.static(path.join(__dirname, '/upload')));
 app.use(express.static(path.join(__dirname, '/frontend/build')));
-app.get('*', (req,res) => res.sendFile(path.join(__dirname, '/frontend/build/index.html')));
+app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html')));
 // app.get('/',(req,res)=>{
 //     res.send('server is running')
 // });
