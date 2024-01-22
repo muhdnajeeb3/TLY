@@ -15,24 +15,12 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))
 
-async function connectToDatabase() {
-    try {
-      await mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost/amazona', {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        useCreateIndex: true,
-      });
-      console.log('Connected to database');
-    } catch (error) {
-      console.error('Error connecting to database:', error);
-      process.exit(1);
-    }
-  }
-  
-  (async () => {
-    await connectToDatabase();
-    // ... Other code that relies on the database connection ...
-  })();
+mongoose.connect(process.env.MONGODB_URL|| 'mongodb+srv://amazona:1234@tly.nu8g3re.mongodb.net/?retryWrites=true&w=majority',{
+    useNewUrlParser:true,
+    useUnifiedTopology:true,
+    useCreateIndex:true,
+    
+})
 // console.log('connected to databse');
 
 app.use('/api/uploads',uploadRouter)
