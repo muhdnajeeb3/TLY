@@ -32,13 +32,16 @@ app.get('/api/config/paypal',(req,res)=>{
 });
 const __dirname = path.resolve();
 // Serve static files from the 'frontend/build' directory
-app.use(express.static(path.join(__dirname, 'frontend/build')));
+// Serve static files from the 'frontend/build' directory
+app.use(express.static(path.join(__dirname, 'D:/TLY-RE-OPEN/mern-amazone/frontend/build')));
 
 // Add the upload directory if needed
-app.use('/upload', express.static(path.join(__dirname, 'upload')));
+app.use('/upload', express.static(path.join(__dirname, 'D:/TLY-RE-OPEN/mern-amazone/upload')));
+
+// Catch-all route to serve the 'index.html' file
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'frontend/build/index.html'));
-  });
+  res.sendFile(path.join(__dirname, 'D:/TLY-RE-OPEN/mern-amazone/frontend/build/index.html'));
+});
 
 app.use((err, req, res, next)=>{
     res.status(500).send({message: err.message})
